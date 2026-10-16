@@ -41,4 +41,3 @@ def get_back_keyboard() -> InlineKeyboardMarkup:
         ]
     )
 
-#dctttttt
