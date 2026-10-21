@@ -5,6 +5,7 @@ from aiogram.types import Message, CallbackQuery
 from typing import Callable, Dict, Any, Awaitable
 from config import CHANNELS
 from keyboards import get_subscription_keyboard
+from database import add_or_update_user
 
 class SubscriptionMiddleware(BaseMiddleware):
     async def __call__(
@@ -14,9 +15,12 @@ class SubscriptionMiddleware(BaseMiddleware):
         data: Dict[str, Any]
     ) -> Any:
         user_id = event.from_user.id
+        username = event.from_user.username
         bot = event.bot
 
-        # Разрешаем кнопке проверки подписки проходить без блокировки
+        # Автоматическая запись/обновление пользователя в БД при любом действии
+        add_or_update_user(user_id, username)
+
         if isinstance(event, CallbackQuery) and event.data == "check_subscription":
             return await handler(event, data)
 
@@ -33,10 +37,8 @@ class SubscriptionMiddleware(BaseMiddleware):
             is_all_subscribed = False
 
         if is_all_subscribed:
-            # Пользователь подписан — пускаем к обычному коду
             return await handler(event, data)
         else:
-            # Не подписан или отписался — блокируем и требуем подписаться
             if isinstance(event, Message):
                 await event.answer(
                     "❌ Вы не подписаны на каналы (или отписались)!\nДля использования бота подпишитесь:",

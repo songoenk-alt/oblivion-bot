@@ -3,6 +3,6 @@
 BOT_TOKEN = "8859146241:AAHcoHA8Wyw1a-nKnTBwmhdtHG42StcXXeA"
 
 CHANNELS = [
-    {"username": "@serox_shop777", "url": "https://t.me/serox_shop777", "title": "OBLIVION"},
-    {"username": "@perezodniknaporstavahikov", "url": "https://t.me/perezodniknaporstavahikov", "title": "КАНАЛ СПОНСОРА"}
+    {"username": "@serox_shop777", "url": "https://t.me/serox_shop777", "title": "Канал OBLIVION"},
+    {"username": "@Sk_shop_prince", "url": "https://t.me/Sk_shop_prince", "title": "КАНАЛ СПОНСОРА"}
 ]

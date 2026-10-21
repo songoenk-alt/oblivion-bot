@@ -4,7 +4,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from config import CHANNELS
 
 def get_subscription_keyboard() -> InlineKeyboardMarkup:
-    """Клавиатура с каналами спонсоров"""
+    """Клавиатура с каналами спонсоров для проверки подписки"""
     buttons = []
     for ch in CHANNELS:
         buttons.append([InlineKeyboardButton(text=f"📢 {ch['title']}", url=ch['url'])])
@@ -21,7 +21,7 @@ def get_main_menu_keyboard() -> InlineKeyboardMarkup:
     )
 
 def get_buy_keyboard() -> InlineKeyboardMarkup:
-    """Кнопки под прайсом (разделенные Покупка и Поддержка)"""
+    """Кнопки под прайс-листом (раздельные кнопки 'Купить' и 'Поддержка')"""
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [
@@ -34,10 +34,18 @@ def get_buy_keyboard() -> InlineKeyboardMarkup:
     )
 
 def get_back_keyboard() -> InlineKeyboardMarkup:
-    """Кнопка возврата в меню"""
+    """Кнопка возврата в меню из раздела политики"""
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text="⬅️ Назад в меню", callback_data="back_to_menu")]
         ]
     )
 
+def get_broadcast_confirm_keyboard() -> InlineKeyboardMarkup:
+    """Клавиатура подтверждения админ-рассылки"""
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text="🚀 Подтвердить и отправить", callback_data="confirm_broadcast")],
+            [InlineKeyboardButton(text="❌ Отмена", callback_data="cancel_broadcast")]
+        ]
+    )
